@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\news;
+use App\Meeting;
+
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -11,14 +13,25 @@ class NewsController extends Controller
     {
         return news::all();
     }
+    public function indexToIndex()
+    {
+        $allData = [news::all(), Meeting::all()];
+        return view('index')->with('allData', $allData);
+    }
+
 
     public function store(Request $request)
-    {   $request->validate([
-        "news"=>"required",
-     
-    ]);
-
-         return news::create($request->all());
+    {
+        $request->validate([
+            "news" => "required",
+            'imgUrl' => "required|url"
+        ]);
+        $user  = news::create($request->all());
+        $response = [
+            "user" => $user,
+            "Messaga" => "Success added this object"
+        ];
+        return response($response, 201);
     }
 
 
@@ -30,14 +43,14 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-       $product = news::find($id);
-       $product->update($request->all());
-       return $product;
+        $News = news::find($id);
+        $News->update($request->all());
+        return $News;
     }
 
 
     public function destroy($id)
     {
-       return news::destroy($id);
+        return news::destroy($id);
     }
 }

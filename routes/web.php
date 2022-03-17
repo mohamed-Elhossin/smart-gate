@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/index', function () {
-    return view('index');
-});
+Route::get('/', 'Home@indexToIndex');
+Route::post('/postStudent', "StudentController@store")->name('student.store');
+// Route::get('/allnews', "NewsController@indexToIndex");
+//  Route::get('/allnews',"MeetingController@indexToIndex");

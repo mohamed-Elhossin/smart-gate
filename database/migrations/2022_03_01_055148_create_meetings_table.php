@@ -15,7 +15,8 @@ class CreateMeetingsTable extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->text('title');
+            $table->text('imgUrl');
             $table->timestamps();
         });
     }

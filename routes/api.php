@@ -11,18 +11,16 @@ use App\Http\Controllers\StudentController;
 
 
 Route::resources([
-    "news"=>"NewsController"
+    "news" => "NewsController"
 ]);
 
 Route::resources([
-    "meeting"=>"MeetingController"
+    "meeting" => "MeetingController"
 ]);
 
-Route::resources([
-    "student"=>"StudentController"
-]);
+Route::get('/student', "StudentController@index");
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
